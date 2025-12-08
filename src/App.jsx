@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 
 // --- UI Components ---
-import { Card, CardContent } from "./components/ui/card";  // المسار مضبوط على فولدر components/ui
+import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
 
-// --- Auth ---
+// --- Pages ---
+import Attendance from "./pages/Attendance";
+import Mass from "./pages/Mass";
+import Children from "./pages/Children";
+
+// --- Simple Auth ---
 const AUTH_USERNAME = "admin";
-const AUTH_PASSWORD = "7813";
+const AUTH_PASSWORD = "1234";
 
 function ProtectedRoute({ children }) {
   const isLogged = localStorage.getItem("logged") === "true";
