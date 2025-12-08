@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
-
-// --- UI Components ---
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
 import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-
-// --- Pages ---
-import Attendance from "./pages/Attendance";
-import Mass from "./pages/Mass";
-import Children from "./pages/Children";
 
 // --- Simple Auth ---
 const AUTH_USERNAME = "admin";
@@ -55,27 +48,16 @@ function Login() {
   );
 }
 
-// --- Dashboard (مثال مبسط) ---
+// --- Dashboard ---
 function Dashboard() {
   return (
     <div className="min-h-screen bg-[url('/church-bg.jpg')] bg-cover bg-center p-6 space-y-6 backdrop-blur-md bg-white/60">
       <h1 className="text-4xl font-bold text-center text-red-900">لوحة التحكم</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="p-4 rounded-2xl shadow-xl hover:shadow-2xl backdrop-blur-md bg-white/80 transition">
           <CardContent>
             <Link to="/attendance" className="text-xl block text-center font-semibold">📘 تسجيل الحضور والغياب</Link>
-          </CardContent>
-        </Card>
-
-        <Card className="p-4 rounded-2xl shadow-xl hover:shadow-2xl backdrop-blur-md bg-white/80 transition">
-          <CardContent>
-            <Link to="/mass" className="text-xl block text-center font-semibold">⛪ تسجيل حضور القداس</Link>
-          </CardContent>
-        </Card>
-
-        <Card className="p-4 rounded-2xl shadow-xl hover:shadow-2xl backdrop-blur-md bg-white/80 transition">
-          <CardContent>
-            <Link to="/children" className="text-xl block text-center font-semibold">👼 إدارة بيانات الأطفال</Link>
           </CardContent>
         </Card>
       </div>
@@ -83,21 +65,16 @@ function Dashboard() {
   );
 }
 
-// --- Simple Pages ---
-function Attendance() { return <h1>Attendance Page</h1>; }
-function Mass() { return <h1>Mass Page</h1>; }
-function Children() { return <h1>Children Page</h1>; }
+// --- Attendance Page ---
+import AttendancePage from "./pages/Attendance";
 
-// --- App Router ---
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
-        <Route path="/mass" element={<ProtectedRoute><Mass /></ProtectedRoute>} />
-        <Route path="/children" element={<ProtectedRoute><Children /></ProtectedRoute>} />
+        <Route path="/attendance" element={<ProtectedRoute><AttendancePage /></ProtectedRoute>} />
       </Routes>
     </Router>
   );
