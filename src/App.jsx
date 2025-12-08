@@ -7,7 +7,7 @@ import { Button } from "./components/ui/button";
 
 // --- Auth ---
 const AUTH_USERNAME = "admin";
-const AUTH_PASSWORD = "1234";
+const AUTH_PASSWORD = "7813";
 
 function ProtectedRoute({ children }) {
   const isLogged = localStorage.getItem("logged") === "true";
