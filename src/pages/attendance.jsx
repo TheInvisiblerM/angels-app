@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
 import { db } from "../firebase/firebaseConfig";
 import { collection, getDocs, addDoc, updateDoc, doc } from "firebase/firestore";
 
@@ -8,7 +8,7 @@ export default function Attendance() {
 
   const attendanceCollection = collection(db, "attendance");
 
-  // جلب البيانات من Firebase عند تحميل الصفحة
+  // جلب البيانات عند تحميل الصفحة
   useEffect(() => {
     const fetchData = async () => {
       const data = await getDocs(attendanceCollection);
@@ -18,7 +18,7 @@ export default function Attendance() {
     fetchData();
   }, []);
 
-  // حفظ التغييرات على Firebase
+  // تعديل أي خلية وحفظها في Firebase
   const handleChange = async (index, field, value) => {
     const newRows = [...rows];
     newRows[index][field] = value;
