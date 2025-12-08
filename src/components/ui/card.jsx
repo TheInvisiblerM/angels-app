@@ -1,13 +1,14 @@
-
-export default function Card({children}) {
+export function Card({ children, className = "" }) {
   return (
-    <div style={{
-      padding:'20px',
-      border:'1px solid #ccc',
-      borderRadius:'12px',
-      background:'#fff',
-      boxShadow:'0 2px 8px rgba(0,0,0,0.1)'
-    }}>
+    <div className={`rounded-xl shadow-xl bg-white/80 p-4 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+export function CardContent({ children, className = "" }) {
+  return (
+    <div className={`p-2 ${className}`}>
       {children}
     </div>
   );
