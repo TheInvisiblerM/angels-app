@@ -103,9 +103,7 @@ export default function AttendancePage() {
 }
 
 
-// -------------------------------------------------------------
-// App Router (src/App.jsx)
-// -------------------------------------------------------------
+// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
@@ -113,14 +111,28 @@ import Dashboard from "./pages/Dashboard";
 import AttendancePage from "./pages/Attendance";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-
 export default function App() {
-return (
-<Router>
-<Routes>
-<Route path="/" element={<Login />} />
-<Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-<Route path="/attendance" element={<ProtectedRoute><AttendancePage /></ProtectedRoute>} />
-</Routes>
-</Router>
-);
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/attendance"
+          element={
+            <ProtectedRoute>
+              <AttendancePage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+}
