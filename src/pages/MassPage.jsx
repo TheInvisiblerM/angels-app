@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { db } from "../firebase/firebaseConfig";
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 
-export default function AttendancePage() {
+export default function MassPage() {
   const [rows, setRows] = useState([]);
-  const attendanceCollection = collection(db, "attendance");
+  const massCollection = collection(db, "mass");
 
   useEffect(() => {
     const fetchData = async () => {
-      const snapshot = await getDocs(attendanceCollection);
+      const snapshot = await getDocs(massCollection);
       setRows(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     };
     fetchData();
@@ -17,26 +17,26 @@ export default function AttendancePage() {
   const addRow = async () => {
     const today = new Date().toISOString().split("T")[0];
     const newRow = { name: "", present: false, absent: false, date: today };
-    const docRef = await addDoc(attendanceCollection, newRow);
+    const docRef = await addDoc(massCollection, newRow);
     setRows(prev => [...prev, { id: docRef.id, ...newRow }]);
   };
 
   const handleChange = async (id, field, value) => {
-    const docRef = doc(db, "attendance", id);
+    const docRef = doc(db, "mass", id);
     await updateDoc(docRef, { [field]: value });
-    setRows(prev => prev.map(r => r.id === id ? { ...r, [field]: value } : r));
+    setRows(prev => prev.map(r => r.id===id ? {...r, [field]:value} : r));
   };
 
   const handleDelete = async (id) => {
-    const docRef = doc(db, "attendance", id);
+    const docRef = doc(db, "mass", id);
     await deleteDoc(docRef);
-    setRows(prev => prev.filter(r => r.id !== id));
+    setRows(prev => prev.filter(r => r.id!==id));
   };
 
   return (
     <div className="min-h-screen p-6 bg-[url('/church-bg.jpg')] bg-cover bg-center">
       <div className="bg-white/80 p-6 rounded-2xl shadow-xl backdrop-blur-md">
-        <h1 className="text-3xl font-bold mb-4 text-center text-red-900">📘 حضور وغياب اليوم</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center text-red-900">⛪ حضور القداس اليوم</h1>
         <button onClick={addRow} className="mb-4 px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">➕ إضافة صف جديد</button>
         <table className="w-full border shadow rounded-xl overflow-hidden text-center">
           <thead className="bg-red-800 text-white text-lg">
@@ -50,7 +50,7 @@ export default function AttendancePage() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, index) => (
+            {rows.map((row,index)=>(
               <tr key={row.id} className="even:bg-gray-100 text-lg">
                 <td className="p-3">{index+1}</td>
                 <td className="p-3">
